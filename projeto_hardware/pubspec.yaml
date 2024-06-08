@@ -36,7 +36,6 @@ dependencies:
   encrypt: any
   random_string: ^2.0.1
   url_launcher: ^6.0.3
-  flutter_google_maps: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

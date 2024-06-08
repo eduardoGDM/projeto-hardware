@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:flutter_google_maps/flutter_google_maps.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,9 +30,9 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  abrirMaps(String latitude, String longitude) async {
+  Future<void> abrirMaps(double latitude, double longitude) async {
     final url =
-        'https://www.google.com/maps/dir/?api=1&destination=$latitude,$longitude';
+        'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -73,8 +72,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    String lat = userData[0]['latitude'].toString();
-                    String lng = userData[0]['longitude'].toString();
+                    double lat = double.parse(userData[0]['latitude']);
+                    double lng = double.parse(userData[0]['longitude']);
                     abrirMaps(lat, lng);
                   },
                   child: const Text("Ver localização"),
@@ -86,10 +85,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
-
-void main() {
-  runApp(MaterialApp(
-    home: HomePage(),
-  ));
 }
